@@ -1,0 +1,91 @@
+<form id="edit-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label for="claimer_name" class="control-label col-xs-12 col-sm-2">{:__('Claimer')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="claimer_name" name="row[claimer_name]" value="{$row.claimer_name}" data-rule="required" disabled="disabled" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="boss_name" class="control-label col-xs-12 col-sm-2">{:__('Boss')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="boss_name" name="row[boss_name]" value="{$row.boss_name}" data-rule="required" disabled="disabled" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="claim_product_id" class="control-label col-xs-12 col-sm-2">{:__('Claim_product_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="claim_product_id" name="row[claim_product_id]" value="{$row.claim_product_id}" data-rule="required" disabled="disabled" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="money" class="control-label col-xs-12 col-sm-2">{:__('Money')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="money" name="row[money]" value="{$row.money}" data-rule="required" disabled="disabled" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="car_id" class="control-label col-xs-12 col-sm-2">{:__('Car_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="car_id" name="row[car_id]" value="{$row.car_id}" data-rule="required" disabled="disabled" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="remain_periods" class="control-label col-xs-12 col-sm-2">{:__('Remain_periods')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="remain_periods" name="row[remain_periods]" value="{$row.remain_periods}" disabled="disabled" data-rule="required" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="order_code" class="control-label col-xs-12 col-sm-2">{:__('Order_code')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="order_code" name="row[order_code]" value="{$row.order_code}" disabled="disabled" data-rule="required" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="from_order" class="control-label col-xs-12 col-sm-2">{:__('From_order')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="from_order" name="row[from_order]" value="{$row.from_order}" disabled="disabled" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="contract_code" class="control-label col-xs-12 col-sm-2">{:__('Contract_code')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="contract_code" name="row[contract_code]" value="{$row.contract_code}" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="state" class="control-label col-xs-12 col-sm-2">{:__('State')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[state]', ['reviewed'=>__('Reviewed'), 'success'=>__('Success'),'faild'=>__('Faild')], $row['state'])}
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    function formsubmit() {
+        var state = $('input:radio[name="row[state]"]:checked').val();
+        var id = $('input:text[name="row[id]"]').val();
+        $.ajax({
+            type: 'PUT',
+            dataType: 'json',
+            // url: "http://192.168.31.111:8008/verify/order/",
+            url: "http://api.xiyueyi.cn:8687/verify/order/",
+            data: {state:state,claim_order_id:id},
+            success: function(resp) {
+                    Form.api.bindevent($("form[role=form]"));
+                    Controller.api.bindevent();
+            },
+            error: function(error) {
+                return false;
+            }
+        });
+    }
+</script>

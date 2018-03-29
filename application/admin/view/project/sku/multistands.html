@@ -1,0 +1,132 @@
+<div>
+<script type="text/javascript">
+window.bindMultiSynchTypeChange = function(){
+		$(".multi_synch_type").change(function(){
+			if($(this).val() == 'virt'){
+				$(this).next(".multi_v_quantity").fadeIn();
+				$(this).nextAll("#multi_v_quantity_fr").fadeIn();				
+			}else{
+				$(this).next(".multi_v_quantity").val("");
+				$(this).next(".multi_v_quantity").hide();
+				$(this).nextAll("#multi_v_quantity_fr").hide();
+			}
+		});	
+}
+
+
+</script>
+<table id="standsAttrTable_cont">
+    <thead >
+        <tr >
+            <{foreach from=$standkey key=key item=item}>
+            <td width="70"  align="center" bgcolor="#e5e5e5" name="guige"><{$item}></td>
+            <{/foreach}>
+            <td width="140" align="center" bgcolor="#e5e5e5">商家编码</td>
+            <td width="140" align="center" bgcolor="#e5e5e5">商品条码</td>
+            <td width="120" align="center" bgcolor="#e5e5e5">参考售价</td>
+            <td width="250" align="center" bgcolor="#e5e5e5">同步库存类型<span class="fr"><div class="l-icon l-icon-help tip fleft" title="需在系统设置中启用库存同步。同步真实库存：将所有仓库（残次品库除外）的可用库存同步至店铺；同步虚拟库存或真实库存不足时同步虚拟库存时，需在输入框中填写虚拟库存值"></div></span></td>
+            <td width="120" align="center" bgcolor="#e5e5e5">重量</td>
+            <td  align="center" bgcolor="#e5e5e5">体积</td>
+        </tr>
+    </thead>
+    <{foreach from=$standvalue key=skey item=sitem}>
+    <tr>
+        <{foreach from=$sitem key=tkey item=titem}>
+            <td align="center"><{$titem}><input type='hidden' name="multi[base][<{$skey}>][stands][<{$tkey}>]" value="<{$titem}>"></td>
+        <{/foreach}>
+        <td align="center"><input type="text" class="field" style="width:120px;" name="multi[base][<{$skey}>][outer_id]" value="<{$skey|stringopt:outerId:$first}>"></td>
+        <td align="center"><input type="text"  class="field"style="width:120px;" name="multi[base][<{$skey}>][barcode]" value="<{$skey|stringopt:rand}>"></td>
+        <td align="center">
+        	<input type="text"  class="field multi-sku-price" style="width:70px;" name="multi[base][<{$skey}>][refer_price]" data-skey="<{$skey}>" value="">
+        </td>
+        <td align="center">
+        <select class="multi_synch_type l-select select2" name="multi[base][<{$skey}>][synch_type]">
+        <{foreach $synchType as $k=>$v}>
+        	<option value="<{$k}>"><{$v}></option>
+        <{/foreach}>
+        </select>&nbsp;
+        <input type="text"  class="field multi_v_quantity" style="width:50px;display:none;float: left;" name="multi[base][<{$skey}>][v_quantity]" value="">
+        <span id="multi_v_quantity_fr" style="display:none;float: left;position: relative;"><div class="l-icon l-icon-help tip fleft" title="需在系统设置中启用库存同步。同步真实库存：将所有仓库（残次品库除外）的可用库存同步至店铺；同步虚拟库存或真实库存不足时同步虚拟库存时，需在输入框中填写虚拟库存值"></div></span>
+        </td>
+        <td align="center"><input type="text" style="width:70px;" class="field" name="multi[base][<{$skey}>][weight]" value=""></td>
+        <td align="center"><input type="text" style="width:60px;" class="field" name="multi[base][<{$skey}>][volume]" value=""></td>
+    </tr>
+    <{/foreach}>		
+</table>
+<!-- ajax content for m_goods_cargos_cont -->
+<table id="m_goods_cargos_cont">
+    <thead>
+        <tr > 
+            <{foreach from=$standkey key=key item=item}>
+            <td  style="background:#e5e5e5" align="center"><{$item}></td>
+            <{/foreach}>
+            <td align="center" style="background:#e5e5e5;">全部仓库</td>
+            
+        </tr>
+    </thead>
+    <{foreach from=$standvalue key=skey item=sitem}>
+        <tr> 
+        <{foreach from=$sitem key=tkey item=titem}>
+            <td width="70" align="center"><{$titem}><input type="hidden" name="multi[storage][<{$skey}>][stands][<{$tkey}>]" value="<{$titem}>"></td>
+        <{/foreach}>
+        	<td align="left">
+            <{foreach from=$storages item=storage_name key=key}>
+                <span data-skey="<{$skey}>" data-sid="<{$key}>" data-id-name="multi[storage][<{$skey}>][storage][<{$key}>][ch]" class="goods_cargos_item"><{$storage_name}></span>
+            <{/foreach}>
+            </td>
+        </tr>
+    <{/foreach}>
+</table>
+<!--<{if $isDsos}>-->
+<div id="j_goods_dsos_skus_cont">
+    <table>
+        <tbody>
+        <tr>
+            <td class="form-frame-lab">分销上架：</td>
+            <td class="form-frame-field" style="width:90px;">
+                <input id="j_dsos_status" type="radio" name="goods_dsos[status]" />
+            </td>
+            <td><span style="font-size: 12px;font-weight: normal;color: #999;">分销上/下架是商品属性，不区分规格。</span></td>
+            <td colspan="5"></td>
+        </tr>
+        </tbody>
+    </table>
+	<table>
+    	<thead>
+        	<tr>
+            	<!--<{foreach from=$standkey key=key item=item}>-->
+                <th rowspan="2" style="background:#e5e5e5;text-align:center;"><{$item}></th>
+                <!--<{/foreach}>-->
+                <!--<{foreach $dsosLevels as $k=>$v}>-->
+                <th colspan="2" style="background:#e5e5e5;text-align:center;"><{$v.lv_name}></th>
+                <!--<{/foreach}>-->
+            </tr>
+            <tr>
+            	<!--<{foreach $dsosLevels as $k=>$v}>-->
+                <th style="background:#e5e5e5;text-align:center;width:60px;">折扣</th>
+                <th style="background:#e5e5e5;text-align:center;width:60px;">订货价</th>
+                <!--<{/foreach}>-->
+            </tr> 
+        </thead>
+        <tbody align="center">
+        	<!--<{foreach from=$standvalue key=skey item=sitem}>-->
+            <tr id="j_dsos_sku_<{$skey}>"> 
+                <!--<{foreach from=$sitem key=tkey item=titem}>-->
+                <td width="70" align="center"><{$titem}></td>
+                <!--<{/foreach}>-->
+                <!--<{foreach $dsosLevels as $k=>$v}>-->
+                <td width="60"><{$v.discount*100}>%</td>
+                <td width="60">
+                    <input type="text" name="goods_dsos[dh_price][<{$skey}>][<{$v.lv_id}>]" class="dsos-price" data-discount="<{$v.discount}>" style="width:48px;"/>
+                </td>
+                <!--<{/foreach}>-->    
+            </tr>
+            <!--<{/foreach}>-->
+        		
+        
+        
+        </tbody>
+    </table>
+</div>
+<!--<{/if}>-->
+</div>

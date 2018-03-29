@@ -1,0 +1,36 @@
+<?php
+
+return [
+    'Mobile'      				=> '手机号',
+	'Fullname'					=> '姓名',
+	'Parent_user_profile_id'	=> '上级代理商',
+	'Sex'						=> '性别',
+	'Birth_date'				=> '出生日期',
+	'Identity_id'				=> '身份证',
+	'Recommend_code'			=> '推荐码',
+	'Hot_agency'				=> '热门代理商',
+	'Agency_of_shop_id'			=> '店铺',
+    'Recommend_user_id' 		=> '推荐人',
+    '0' 						=> '否',
+    '1' 						=> '是',
+    'Address' 					=> '地址',
+    'Telephone' 				=> '手机号码',
+    'avatar' 					=> '头像',
+    'password' 					=> '密码',
+    'email' 					=> '邮箱',
+    'money' 					=> '账户余额',
+    'funny_bean' 				=> '喜豆',
+    'share_score' 				=> '共享积分',
+    'quick_score' 				=> '快享积分',
+    'money_add_step' 			=> '每天返回余额量',
+    'money_stock' 				=> '未到账余额剩余量',
+    'all_tax_stock' 			=> '所有未返落地费用总和',
+    'base_brokerage_stock' 		=> '待结算的佣金',
+    'recommend_money_stock' 	=> '推广他人成为会员获得未返余额',
+    'last_return_brokerage_at' 	=> '上次结算时间',
+    'created_time' 				=> '财富创建时间',
+    'welfare_score' 			=> '待分配公益积分',
+    'distributed_welfare_score' => '已分配公益积分',
+
+
+];

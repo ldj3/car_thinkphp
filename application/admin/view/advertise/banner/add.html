@@ -1,0 +1,47 @@
+	<form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    
+    
+    <div class="form-group">
+        <label for="title" class="control-label col-xs-12 col-sm-2">{:__('Title')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="title" data-rule="required" class="form-control" name="row[title]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="image" class="control-label col-xs-12 col-sm-2">{:__('Image')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="form-inline">
+                <input id="image" class="form-control" size="50" name="row[image]" type="text" value="" placeholder="图片大小为 750×300 ">
+                <span><button type="button" id="pluploadtitle-image" class="btn btn-danger plupload" data-input-id="image" data-mimetype="image/*" data-multiple="false" data-preview-id="t-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                <span><button type="button" id="fachoosetitle-image" class="btn btn-primary fachoose" data-input-id="image" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                <ul class="row list-inline plupload-preview" id="t-image"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="detail_image" class="control-label col-xs-12 col-sm-2">{:__('Detail_image')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="form-inline">
+                <input id="detail_image" class="form-control" size="50" name="row[detail_image]" type="text" value="" placeholder="图片宽度为 300 ">
+                <span><button type="button" id="1pluploadtitle-image" class="btn btn-danger plupload" data-input-id="detail_image" data-mimetype="image/*" data-multiple="false" data-preview-id="1-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                <span><button type="button" id="1fachoosetitle-image" class="btn btn-primary fachoose" data-input-id="detail_image" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                <ul class="row list-inline plupload-preview" id="1-image"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="index" class="control-label col-xs-12 col-sm-2">{:__('Index')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="index" data-rule="required" class="form-control" name="row[index]" type="text" value="">
+        </div>
+    </div>
+	
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

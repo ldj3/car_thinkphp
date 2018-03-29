@@ -1,0 +1,191 @@
+<script type="text/javascript" language="javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<div class="form-frame-body" style="width:1180px;">
+
+<table width="100%"  cellpadding="0" cellspacing="0">
+    <tr>
+        <td class="form-frame-lab">规格确定：</td>
+        <td style="width:auto">
+<!-- -->        
+        <table width="100%" class="form-table gg-table" cellpadding="0" cellspacing="0" id="standsTable" style="width:100%; border-top:0;">
+            <thead>
+            <tr>
+                <td width="120" align="center" style="background:#e5e5e5;">
+                    <div style="width:120px;">规格名称<span style="color:#999999">(如：颜色)</span></div>
+                </td>
+                <td style="background:#e5e5e5;">
+                    规格值<span style="color:#999999">(如：红色)</span>
+                </td>
+            </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <td>&emsp;</td>
+                    <td>
+                        <input type="button"  class="l-button" style="float:left" value="添加规格"  id="addStand"  />
+                        <input type="button"  id="delStand" style="float:left; margin-left:10px;" class="l-button"  value="删除规格" >
+                        <input type="button" value="生成规格" style="float:left; margin-left:10px;" class="l-button btn-info" id="standSave">
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+<!-- -->        
+        </td>
+    </tr>
+    
+    <tr>
+        <td class="form-frame-lab">规格属性：</td>
+        <td style="width:auto">
+<!-- -->        
+        <table width="100%" class="form-table gg-table" cellpadding="0" cellspacing="0" id="standsAttrTable" style="width:100%; border-top:0;">
+        </table>
+    </tr>
+   
+</table>
+     
+</div><!-- .form-frame-body END -->
+
+
+
+<style>
+
+.notdbo td{ border-width:0;}
+
+#standsTable td{
+    width:auto;
+}
+#m_goods_cargos_cont td{
+    border-bottom:1px solid #CCC;
+}
+</style>
+<script>
+$(function(){
+    if(window.MULTI_STANDS_INITED) return;
+    window.MULTI_STANDS_INITED = true;
+    var $standsRows = $('#standsTable tbody');
+    var addStandRow = function(){
+        var tr_num=$standsRows.find('tr').size();
+        var $tr = $("<tr><td  align='center' ><input type='text' class='field' style='width:50px;' name='prop_"+tr_num+"'></td></tr>");
+        var $val_td = $('<td></td>');
+        for(var i=1;i<=8;i++){
+            $val_td.append(
+                $('<input />').addClass('field').css({width:80,marginRight:5})
+                                          .attr({type:'text',name:'val_'+tr_num + '[]'})
+            );
+        }
+        $standsRows.append($tr.append($val_td));
+        
+    }
+    //
+    addStandRow();
+    
+    $("#addStand").click(function(){ addStandRow();});
+
+    $("#delStand").click(function()
+    {
+        if($standsRows.find('tr').size() > 1){
+            $standsRows.find('tr:last-child').remove(); 
+        }
+    });
+    $("#standSave").click(function()
+    {
+        var s = $standsRows.find('tr').size();
+        var stand_val = new Array();
+        for(var i=0;i<s;i++)
+        {
+            var cur = i;
+            var prop = $("input[name='prop_"+cur+"']").val();
+            stand_val[i] = new Array();
+            $("input[name='val_"+cur+"[]']").each(function(m)
+            {
+                if($(this).val() !='')
+                {
+                  stand_val[i][m] = '{'+prop+':'+$(this).val()+'}'; 
+                }
+            });
+        }
+        var url='project/Car/getMultiStands';
+        var params='stand_val='+stand_val;
+        $.ajax({
+            type: "post",
+            url: url,
+            data:params,
+            success: function(result)
+            {
+                $cont = $(result);
+                var $standsAttrTable_cont = $cont.find('#standsAttrTable_cont');
+                
+                var $m_goods_cargods_cont = $cont.find('#m_goods_cargos_cont');
+                    $m_goods_cargods_cont.find('.goods_cargos_item').each(function(){
+                        var id = $(this).attr('data-sid');
+                        var skey = $(this).attr('data-skey');
+                        var name = $(this).text();
+                        $(this).replaceWith(createStorage({
+                                        storage_id:id,
+                                        storage_name:name,
+                                        storage_id_name:'multi[storage]['+skey+'][goods_storage][]',
+                                        id_name:$(this).attr('data-id-name')
+                            }));
+                    });
+                
+                $(".multi_synch_type",$standsAttrTable_cont).change(function(){
+                    if($(this).val() == 'virt' || $(this).val() == 'oos_as_virt'){
+                        $(this).next(".multi_v_quantity").fadeIn();
+                        $(this).nextAll("#multi_v_quantity_fr").fadeIn();               
+                    }else{
+                        $(this).next(".multi_v_quantity").val("");
+                        $(this).next(".multi_v_quantity").hide();
+                        $(this).nextAll("#multi_v_quantity_fr").hide();
+                    }
+                });
+                
+                $('#standsAttrTable').html($standsAttrTable_cont);
+                $('#m_goods_cargos').html($m_goods_cargods_cont);
+                
+                
+                
+                //分销的内容
+                var $j_goods_dsos_skus_cont = $cont.find('#j_goods_dsos_skus_cont');
+                $('#j_goods_dsos_skus').html($j_goods_dsos_skus_cont.html());
+                
+                //分销上下架
+                $('#j_dsos_status').dsRadioBox({
+                    data:[
+                        {text:'上架',value:1},
+                        {text:'下架',value:0}
+                    ],
+                    defaultValue:0
+                });
+                
+                //设置分销价格的函数
+                var setDhPrice = function(skey,price){
+                    price = price || 0;
+                    $('.dsos-price',$('#j_dsos_sku_'+skey)).each(function(){
+                        var $o = $(this),
+                            dc = parseFloat($o.attr('data-discount')||1);
+                        $o.val((Math.round(price*dc*100)/100).toFixed(2));
+                        $o.parent().prev('td').text(dc*100 + '%');
+                    });
+                }
+                
+                //分销价格随SKU价格变化而变化
+                $('.multi-sku-price').change(function(){
+                    var $o = $(this),
+                        skey = $o.attr('data-skey'),
+                        p = $o.val();
+                    setDhPrice(skey,p);
+                }).change();
+                
+                $('.tip').ligerTip();
+            },
+            error: function()
+            {
+              return false;
+            }
+        });     
+    });
+});
+</script>
+
+
+

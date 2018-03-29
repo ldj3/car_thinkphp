@@ -1,0 +1,63 @@
+<form id="edit-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label for="mobile" class="control-label col-xs-12 col-sm-2">{:__('Mobile')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="mobile" name="row[mobile]" value="{$row.mobile}" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fullname" class="control-label col-xs-12 col-sm-2">{:__('Fullname')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="fullname" name="row[fullname]" value="{$row.fullname}" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="birth_date" class="control-label col-xs-12 col-sm-2">{:__('Birth_date')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="date" class="form-control" id="birth_date" name="row[birth_date]" value="{$row.birth_date}" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="avatar" class="control-label col-xs-12 col-sm-2">{:__('Avatar')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="form-inline">
+                <input id="avatar" class="form-control" size="50" name="row[avatar]" type="text" value="{$row.avatar}">
+                <span><button type="button" id="pluploadtitle-image" class="btn btn-danger plupload" data-input-id="avatar" data-mimetype="image/*" data-multiple="false" data-preview-id="t-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                <span><button type="button" id="fachoosetitle-image" class="btn btn-primary fachoose" data-input-id="avatar" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                <ul class="row list-inline plupload-preview" id="t-image"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="sex" class="control-label col-xs-12 col-sm-2">{:__('Sex')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[sex]', ['0'=>__('男'), '1'=>__('女')], $row['sex'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="identity_id" class="control-label col-xs-12 col-sm-2">{:__('Identity_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="identity_id" name="row[identity_id]" value="{$row.identity_id}" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="recommend_user_id" class="control-label col-xs-12 col-sm-2">{:__('Recommend_user_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control selectpage" id="recommend_user_id" name="row[recommend_user_id]" value="{$row.recommend_user_id}" data-source="userprofile/selectpage" data-params='{"custom[fullname]"}' />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="member_level" class="control-label col-xs-12 col-sm-2">{:__('是否降级为普通用户')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[member_level]', ['1'=>__('否'), '0'=>__('是')], $row['member_level'])}
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

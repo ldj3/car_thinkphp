@@ -1,0 +1,82 @@
+<form id="edit-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label for="withdraw_fee_mul" class="control-label col-xs-12 col-sm-2">{:__('Withdraw_fee_mul')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="withdraw_fee_mul" name="row[withdraw_fee_mul]" value="{$row.withdraw_fee_mul}" data-rule="required" >
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="withdraw_fee_plus" class="control-label col-xs-12 col-sm-2">{:__('Withdraw_fee_plus')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="withdraw_fee_plus" name="row[withdraw_fee_plus]" value="{$row.withdraw_fee_plus}" data-rule="required" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="all_return_cycle" class="control-label col-xs-12 col-sm-2">{:__('All_return_cycle')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="all_return_cycle" name="row[all_return_cycle]" value="{$row.all_return_cycle}" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="brokerage_proportion" class="control-label col-xs-12 col-sm-2">{:__('Brokerage_proportion')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="brokerage_proportion" name="row[brokerage_proportion]" value="{$row.brokerage_proportion}" data-rule="required" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="car_threshold" class="control-label col-xs-12 col-sm-2">{:__('Car_threshold')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="car_threshold" name="row[car_threshold]" value="{$row.car_threshold}" data-rule="required" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="high_fixed_commission" class="control-label col-xs-12 col-sm-2">{:__('High_fixed_commission')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="high_fixed_commission" name="row[high_fixed_commission]" value="{$row.high_fixed_commission}" data-rule="required" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="low_fixed_commission" class="control-label col-xs-12 col-sm-2">{:__('Low_fixed_commission')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="low_fixed_commission" name="row[low_fixed_commission]" value="{$row.low_fixed_commission}" data-rule="required" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="brokerage_return_cycle" class="control-label col-xs-12 col-sm-2">{:__('Brokerage_return_cycle')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="brokerage_return_cycle" name="row[brokerage_return_cycle]" value="{$row.brokerage_return_cycle}" data-rule="required" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="commission_proportion_between_agents" class="control-label col-xs-12 col-sm-2">{:__('Commission_proportion_between_agents')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="commission_proportion_between_agents" name="row[commission_proportion_between_agents]" value="{$row.commission_proportion_between_agents}" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="commission_proportion_between_agents" class="control-label col-xs-12 col-sm-2">{:__('Commission_proportion_between_agents')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="commission_proportion_between_agents" name="row[commission_proportion_between_agents]" value="{$row.commission_proportion_between_agents}" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="first_pay_proportion" class="control-label col-xs-12 col-sm-2">{:__('First_pay_proportion')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="first_pay_proportion" name="row[first_pay_proportion]" value="{$row.first_pay_proportion}" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="online_pay_threshold" class="control-label col-xs-12 col-sm-2">{:__('Online_pay_threshold')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="online_pay_threshold" name="row[online_pay_threshold]" value="{$row.online_pay_threshold}" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

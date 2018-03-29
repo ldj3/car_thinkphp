@@ -1,0 +1,98 @@
+<form id="edit-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group" style="display: none;">
+        <label for="id" class="control-label col-xs-12 col-sm-2">{:__('ID')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="id" name="row[id]" value="{$row.id}" data-rule="required" disabled="disabled" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="file1" class="control-label col-xs-12 col-sm-2">{:__('File1')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="form-inline">
+                <input id="file1" class="form-control" size="50" name="row[file1]" type="text" value="{$row.file1}" disabled="disabled">
+                <span><button type="button" id="1plupload-image" class="btn btn-danger plupload" data-input-id="file1" data-mimetype="image/*" data-multiple="false" data-preview-id="1-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                <span><button type="button" id="1fachoose-image" class="btn btn-primary fachoose" data-input-id="file1" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                <ul class="row list-inline plupload-preview" id="1-image"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="file2" class="control-label col-xs-12 col-sm-2">{:__('File2')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="form-inline">
+                <input id="file2" class="form-control" size="50" name="row[file2]" type="text" value="{$row.file2}" disabled="disabled">
+                <span><button type="button" id="2plupload-image" class="btn btn-danger plupload" data-input-id="file2" data-mimetype="image/*" data-multiple="false" data-preview-id="2-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                <span><button type="button" id="2fachoose-image" class="btn btn-primary fachoose" data-input-id="file2" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                <ul class="row list-inline plupload-preview" id="2-image"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="file3" class="control-label col-xs-12 col-sm-2">{:__('File3')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="form-inline">
+                <input id="file3" class="form-control" size="50" name="row[file3]" type="text" value="{$row.file3}" disabled="disabled">
+                <span><button type="button" id="3plupload-image" class="btn btn-danger plupload" data-input-id="file3" data-mimetype="image/*" data-multiple="false" data-preview-id="3-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                <span><button type="button" id="3fachoose-image" class="btn btn-primary fachoose" data-input-id="file3" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                <ul class="row list-inline plupload-preview" id="3-image"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="file4" class="control-label col-xs-12 col-sm-2">{:__('File4')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="form-inline">
+                <input id="file4" class="form-control" size="50" name="row[file4]" type="text" value="{$row.file4}" disabled="disabled">
+                <span><button type="button" id="4plupload-image" class="btn btn-danger plupload" data-input-id="file4" data-mimetype="image/*" data-multiple="false" data-preview-id="4-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                <span><button type="button" id="4fachoose-image" class="btn btn-primary fachoose" data-input-id="file4" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                <ul class="row list-inline plupload-preview" id="4-image"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="file5" class="control-label col-xs-12 col-sm-2">{:__('File5')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="form-inline">
+                <input id="file5" class="form-control" size="50" name="row[file5]" type="text" value="{$row.file5}" disabled="disabled">
+                <span><button type="button" id="5plupload-image" class="btn btn-danger plupload" data-input-id="file5" data-mimetype="image/*" data-multiple="false" data-preview-id="5-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                <span><button type="button" id="5fachoose-image" class="btn btn-primary fachoose" data-input-id="file5" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                <ul class="row list-inline plupload-preview" id="5-image"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="state" class="control-label col-xs-12 col-sm-2">{:__('State')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[state]', ['commited'=>__('Commited'), 'success'=>__('Success'),'faild'=>__('Faild')], $row['state'])}
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" id="btnsubmit" onclick="formsubmit()" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    function formsubmit() {
+        var state = $('input:radio[name="row[state]"]:checked').val();
+        var id = $('input:text[name="row[id]"]').val();
+        $.ajax({
+            type: 'PUT',
+            dataType: 'json',
+            url: "http://api.xiyueyi.cn:8687/verify/agencyOrder/",
+            data: {state: state,verify_data_id:id},
+            success: function(resp) {
+                    Form.api.bindevent($("form[role=form]"));
+                    Controller.api.bindevent();
+            },
+            error: function(error) {
+                return false;
+            }
+        });
+    }
+
+</script>

@@ -1,0 +1,99 @@
+<form id="edit-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label for="id" class="control-label col-xs-12 col-sm-2">{:__('ID')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="id" name="row[id]" value="{$row.id}" data-rule="required;id" disabled="disabled"//>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="user_id" class="control-label col-xs-12 col-sm-2">{:__('User_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="user_id" name="row[user_id]" value="{$row.user_id}" data-rule="required;user_id" disabled="disabled"//>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="mobile" class="control-label col-xs-12 col-sm-2">{:__('Mobile')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="mobile" name="row[mobile]" value="{$row.mobile}" data-rule="required;mobile" disabled="disabled"//>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fullname" class="control-label col-xs-12 col-sm-2">{:__('Fullname')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="fullname" name="row[fullname]" value="{$row.fullname}" data-rule="required;fullname" disabled="disabled"//>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fee" class="control-label col-xs-12 col-sm-2">{:__('Fee')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="fee" name="row[fee]" value="{$row.fee}" data-rule="required;fee" disabled="disabled"//>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="money" class="control-label col-xs-12 col-sm-2">{:__('Money')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="money" name="row[money]" value="{$row.money}" data-rule="required;money" disabled="disabled"//>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="member_level" class="control-label col-xs-12 col-sm-2">{:__('Member_level')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="member_level" name="row[member_level]" value="{$row.member_level}" data-rule="required;member_level" disabled="disabled"//>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="withdraw_number" class="control-label col-xs-12 col-sm-2">{:__('Withdraw_number')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="withdraw_number" name="row[withdraw_number]" value="{$row.withdraw_number}" data-rule="required;withdraw_number" disabled="disabled" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="remarks" class="control-label col-xs-12 col-sm-2">{:__('Remarks')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="remarks" name="row[remarks]" value="{$row.remarks}" data-rule="required;remarks" disabled="disabled"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="member_level" class="control-label col-xs-12 col-sm-2">{:__('Member_level')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="member_level" name="row[member_level]" value="{$row.member_level}" data-rule="required;member_level" disabled="disabled"//>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="state" class="control-label col-xs-12 col-sm-2">{:__('State')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[state]', ['reviewed'=>__('已接收'), 'success'=>__('提现成功'),'faild'=>__('提现失败')], $row['state'])}
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" id="btnsubmit" onclick="formsubmit()" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    function formsubmit() {
+        var state = $('input:radio[name="row[state]"]:checked').val();
+        var id = $('input:text[name="row[id]"]').val();
+        var withdraw_number = $('input:text[name="row[withdraw_number]"]').val();
+        var bank_card_num = $('input:text[name="row[bank_card_num]"]').val();
+        $.ajax({
+            type: 'PUT',
+            dataType: 'json',
+            url: "http://api.xiyueyi.cn:8687/verify/balanceWithdraw/",
+            data: {state: state,balance_withdraw_id:id,withdraw_number:withdraw_number,bank_card_num:bank_card_num},
+            success: function(resp) {
+                    Form.api.bindevent($("form[role=form]"));
+                    Controller.api.bindevent();
+            },
+            error: function(error) {
+                return false;
+            }
+        });
+    }
+
+</script>

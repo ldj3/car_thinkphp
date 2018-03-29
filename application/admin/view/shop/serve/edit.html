@@ -1,0 +1,80 @@
+<form id="edit-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label for="name" class="control-label col-xs-12 col-sm-2">{:__('Name')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="name" name="row[name]" value="{$row.name}" data-rule="required" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="title_image" class="control-label col-xs-12 col-sm-2">{:__('Title_image')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="form-inline">
+                <input id="title_image" class="form-control" size="50" name="row[title_image]" type="text" value="{$row.title_image}">
+                <span><button type="button" id="pluploadtitle-image" class="btn btn-danger plupload" data-input-id="title_image" data-mimetype="image/*" data-multiple="false" data-preview-id="t-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                <span><button type="button" id="fachoosetitle-image" class="btn btn-primary fachoose" data-input-id="title_image" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                <ul class="row list-inline plupload-preview" id="t-image"></ul>
+            </div>
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="detail_image" class="control-label col-xs-12 col-sm-2">{:__('Detail_image')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="form-inline">
+                <input id="detail_image" class="form-control" size="50" name="row[detail_image]" type="text" value="{$row.detail_image}">
+                <span><button type="button" id="pluploaddetail-image" class="btn btn-danger plupload" data-input-id="detail_image" data-mimetype="image/*" data-multiple="false" data-preview-id="d-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                <span><button type="button" id="fachoosedetail-image" class="btn btn-primary fachoose" data-input-id="detail_image" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                <ul class="row list-inline plupload-preview" id="d-image"></ul>
+            </div>
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="province" class="control-label col-xs-12 col-sm-2">{:__('Province')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="province" name="row[province]" value="{$row.province}" />
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="city" class="control-label col-xs-12 col-sm-2">{:__('City')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="city" class="form-control selectpage" data-source="city/selectpage" data-params='{"custom[shop_id]":"1"}' name="row[city]" type="text" value="{$row.city}" data-rule="required">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="user_id" class="control-label col-xs-12 col-sm-2">{:__('User_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="user_id" class="form-control selectpage" data-source="userprofile/selectpage" data-params='{"custom[is_shop_account]":"1"}' name="row[user_id]" type="text" value="{$row.user_id}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="address" class="control-label col-xs-12 col-sm-2">{:__('Address')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea id="address" class="form-control editor" name="row[address]" cols="50" rows="10">{$row.address}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="telephone" class="control-label col-xs-12 col-sm-2">{:__('Telephone')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="telephone" name="row[telephone]" value="{$row.telephone}" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="is_hot" class="control-label col-xs-12 col-sm-2">{:__('Is_hot')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[is_hot]', ['1'=>__('热门'), '0'=>__('正常')], $row['is_hot'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="status" class="control-label col-xs-12 col-sm-2">{:__('Status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[status]', ['normal'=>__('正常'), 'lllegal'=>__('违规')], $row['status'])}
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>
